@@ -1,15 +1,15 @@
 #!/bin/bash
+
 HISTFILE=~/.bash_history  # Set the history file.
 set -o history
 c=0 
-history | tr -s " " | cut -d" " -f 3 | sort | uniq | while read d; do
-str[$c]=$d
-echo $d
-((c++))
+search=`history | tr -s " " | cut -d" " -f 3 | sort | head -1`
+echo $search `history | grep "$search" | wc -l`
+history | tr -s " " | cut -d" " -f 3 | sort |  while read d; do
+count=`history | tr -s " " | cut -d" " -f 3 | sort | grep $d | wc -l`
+search1=$d
+if [ $search1 != $search ];then
+    echo $search1 $count
+    search=$search1
+fi
 done
-c1=`history | wc -l`
-echo $c1
-for i in $c1; do
-var=`history | tr -s " " | cut -d" " -f 3 | sort`
-count=0
-if [ $i == 
